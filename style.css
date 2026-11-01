@@ -234,6 +234,7 @@ b { font-weight: 700; }
 #heroArea .x-rival-layer { left: 0; top: 0; width: 100%; translate: none; }
 
 .fx { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.fx-layer { position: fixed; inset: 0; z-index: 46; pointer-events: none; contain: strict; will-change: transform; }
 .float {
   position: fixed; z-index: 46; pointer-events: none; font-family: var(--display); font-size: 22px; letter-spacing: .02em;
   color: #fff3dc; paint-order: stroke; -webkit-text-stroke: 5px #1a0b04; white-space: nowrap;

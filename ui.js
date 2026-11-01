@@ -112,6 +112,8 @@ function modal(html, buttons = [{ label: 'OK' }], cls = '') {
 }
 
 // ---------- Effects ----------
+// Click effects live in their own contained layer, so adding one never re-lays out the page.
+const fxLayer = document.body.appendChild(el('div', 'fx-layer'));
 function floatAt(x, y, text, cls = '') {
   const f = el('div', 'float ' + cls);
   f.textContent = text;
@@ -120,7 +122,7 @@ function floatAt(x, y, text, cls = '') {
   f.style.left = (r.left + x + rand(-14, 14)) + 'px';
   f.style.top = (r.top + y - 30) + 'px';
   f.style.setProperty('--rot', rand(-8, 8) + 'deg');
-  document.body.appendChild(f);
+  fxLayer.appendChild(f);
   setTimeout(() => f.remove(), 1400);
 }
 function fxPoint(ev) {
@@ -132,7 +134,10 @@ function fxPoint(ev) {
 // Screen-space particles: sparks and food bits on cooking, gold flakes on dumplings.
 const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const BIT_COLORS = ['#7fb069', '#d9a85a', '#a8231f', '#f6d58b', '#b5651d'];
+let liveSpecks = 0;
 function burst(x, y, n, cls) {
+  // Gold flakes from dumplings always show; click particles stop at a cap while the screen is busy.
+  if (cls !== 'gold') n = Math.min(n, 60 - liveSpecks);
   for (let i = 0; i < n; i++) {
     const p = el('i', 'speck ' + cls);
     const a = cls === 'spark' || cls === 'drop' ? rand(-Math.PI * 0.95, -Math.PI * 0.05) : Math.random() * Math.PI * 2;
@@ -144,14 +149,15 @@ function burst(x, y, n, cls) {
     // Sparks are streaks pointing the way they fly.
     if (cls === 'spark') { p.style.setProperty('--a', a + 'rad'); p.style.setProperty('--d', d + 'px'); }
     if (cls === 'bit') p.style.background = BIT_COLORS[i % BIT_COLORS.length];
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 750);
+    liveSpecks++;
+    fxLayer.appendChild(p);
+    setTimeout(() => { p.remove(); liveSpecks--; }, 750);
   }
 }
 // Cooking juice: food flips out of the pan, a heat ring and steam. Capped so fast clicking stays smooth.
 const FLIP_FOODS = ['🍳', '🥩', '🥟', '🍗', '🥓', '🧀', '🥔', '🍖'];
 let liveFx = 0;
-function addFx(node, ms) { liveFx++; document.body.appendChild(node); setTimeout(() => { node.remove(); liveFx--; }, ms); }
+function addFx(node, ms) { liveFx++; fxLayer.appendChild(node); setTimeout(() => { node.remove(); liveFx--; }, ms); }
 function cookFx(x, y, crit, fx = x, fy = y) {
   const ring = el('i', 'cook-ring' + (crit ? ' crit' : ''));
   ring.style.left = x + 'px'; ring.style.top = y + 'px';
@@ -176,21 +182,44 @@ function cookFx(x, y, crit, fx = x, fy = y) {
   }
 }
 function restart(node, cls) { node.classList.remove(cls); void node.offsetWidth; node.classList.add(cls); }
+// Every click counts at once, but its effects are drawn at most once per frame and numbers merge
+// when clicks come faster than FLOAT_GAP, so autoclickers can't flood the page with nodes.
+const FLOAT_GAP = 90;
+let clickQ = [], clickFrame = 0, floatSum = 0, floatCrit = false, floatPos = null, lastFloat = 0, floatTimer = 0, lastBeep = 0;
 function onHeroClick(ev) {
   const { v, crit } = click();
-  const [x, y] = fxPoint(ev);
-  floatAt(x, y, (crit ? 'Crit! +' : '+') + fmt(v), crit ? 'crit' : '');
-  sfx.click(crit);
-  const hero = $('#hero'), r = hero.getBoundingClientRect();
-  const cx = ev.clientX || r.left + r.width / 2, cy = ev.clientY || r.top + r.height / 2;
-  burst(cx, cy, crit ? 14 : 7, 'spark');
-  if (crit) burst(cx, cy, 12, 'gold');
-  burst(cx, cy, crit ? 5 : 2, 'bit');
-  // Hot juice spits from where you hit the steak; food and steam come off its top.
-  burst(cx, cy, crit ? 10 : 4, 'drop');
-  cookFx(cx, cy, crit, r.left + r.width / 2, r.top + r.height * 0.25);
-  restart(hero, crit ? 'shake' : 'bump');
+  clickQ.push({ v, crit, x: ev.clientX, y: ev.clientY });
+  if (!clickFrame) clickFrame = requestAnimationFrame(drawClicks);
   if (S.clicks === 1) updateLeft();
+}
+function flushFloat() {
+  floatTimer = 0;
+  if (!floatSum) return;
+  lastFloat = performance.now();
+  floatAt(floatPos[0], floatPos[1], (floatCrit ? 'Crit! +' : '+') + fmt(floatSum), floatCrit ? 'crit' : '');
+  floatSum = 0; floatCrit = false;
+}
+function drawClicks() {
+  clickFrame = 0;
+  const q = clickQ; clickQ = [];
+  if (!q.length) return;
+  const hero = $('#hero'), r = hero.getBoundingClientRect(), o = $('#fx').getBoundingClientRect();
+  const last = q[q.length - 1], crit = q.some(c => c.crit);
+  const cx = last.x || r.left + r.width / 2 + rand(-60, 60), cy = last.y || r.top + r.height / 2 + rand(-60, 60);
+  floatSum += q.reduce((s, c) => s + c.v, 0); floatCrit = floatCrit || crit; floatPos = [cx - o.left, cy - o.top];
+  const wait = FLOAT_GAP - (performance.now() - lastFloat);
+  if (wait <= 0) flushFloat(); else if (!floatTimer) floatTimer = setTimeout(flushFloat, wait);
+  if (performance.now() - lastBeep > 60) { lastBeep = performance.now(); sfx.click(crit); }
+  // Fast clicking (autoclickers) gets thinner effects; normal clicking looks the same.
+  const rate = R.clickTimes.length, k = rate > 25 ? 0.25 : rate > 12 ? 0.5 : 1;
+  const n = c => Math.ceil(c * k);
+  burst(cx, cy, n(crit ? 14 : 7), 'spark');
+  if (crit) burst(cx, cy, 12, 'gold');
+  burst(cx, cy, n(crit ? 5 : 2), 'bit');
+  // Hot juice spits from where you hit the steak; food and steam come off its top.
+  burst(cx, cy, n(crit ? 10 : 4), 'drop');
+  if (k === 1 || crit || Math.random() < k) cookFx(cx, cy, crit, r.left + r.width / 2, r.top + r.height * 0.25);
+  restart(hero, crit ? 'shake' : 'bump');
 }
 
 // ---------- Golden Dumplings ----------
