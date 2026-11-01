@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0908">
+  <title>Kitchen Hell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍳</text></svg>">
+  <link rel="stylesheet" href="style.css?v=44">
+</head>
+<body>
+  <div id="game">
+    <!-- Top: the pass -->
+    <header id="topbar">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs><linearGradient id="brandFire" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#a8231f"/><stop offset=".6" stop-color="#d4a24c"/><stop offset="1" stop-color="#ffd27a"/></linearGradient></defs>
+          <path fill="url(#brandFire)" d="M32 3c3 9-6 13-6 21 0 4 3 7 6 7-2-4 1-8 5-11 1 6 7 8 7 15 0 2-1 4-2 5 6-3 9-9 8-16-1-9-10-13-18-21z"/>
+          <circle cx="29" cy="44" r="16" fill="#2b2522" stroke="#5d564f" stroke-width="2.5"/>
+          <circle cx="29" cy="44" r="10.5" fill="#15110f"/>
+          <path d="M42 53l15 9" stroke="#5d564f" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <div class="brand-text">
+          <b>Kitchen Hell</b>
+          <button id="gymName" class="gym-name" title="Rename your restaurant"></button>
+        </div>
+      </div>
+      <div class="news" id="newsBox" title="Kitchen radio. Click for the next story."><span class="news-tag">On air</span><span id="news"></span></div>
+      <div class="chips" id="chips">
+        <span class="chip" id="chipStars" title="Stars from Cook-offs"><span class="chip-ic">⭐</span><b id="topStars">0</b><small>Stars</small></span>
+        <span class="chip" id="chipDough" title="Sourdough loaves"><span class="chip-ic">🥯</span><b id="topDough">0</b><small>Loaves</small></span>
+        <span class="chip" id="chipRep" title="Reputation from achievements"><span class="chip-ic">🏵️</span><b id="topRep">0%</b><small>Rep</small></span>
+        <a class="chip chip-link" href="wiki.html" target="_blank" rel="noopener" title="Open the game guide in a new tab"><span class="chip-ic">📖</span><small>Guide</small></a>
+      </div>
+    </header>
+
+    <!-- Left: the stove -->
+    <section id="left">
+      <div class="counter">
+        <div class="counter-label">Steaks served</div>
+        <div id="gains" class="gains">0</div>
+        <div id="gps" class="gps">0 steaks per second</div>
+      </div>
+
+      <div class="hero-wrap">
+        <div class="hero-area" id="heroArea" data-plate="0">
+          <button id="hero" aria-label="Cook">
+            <svg class="pan steak" viewBox="0 0 300 300" aria-hidden="true">
+              <defs>
+                <radialGradient id="crustG" cx="44%" cy="40%" r="66%">
+                  <stop offset="0" style="stop-color: var(--meat-hi)"/>
+                  <stop offset=".62" style="stop-color: var(--meat-mid)"/>
+                  <stop offset="1" style="stop-color: var(--meat-lo)"/>
+                </radialGradient>
+                <linearGradient id="fatG" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#fffaf2"/>
+                  <stop offset=".55" style="stop-color: var(--fat)"/>
+                  <stop offset="1" style="stop-color: var(--fat-lo)"/>
+                </linearGradient>
+                <filter id="fibers" x="0" y="0" width="100%" height="100%">
+                  <feTurbulence type="fractalNoise" baseFrequency=".012 .16" numOctaves="2" seed="9" />
+                  <feColorMatrix values="0 0 0 0 .25  0 0 0 0 .02  0 0 0 0 .05  2.2 0 0 0 -1.05" />
+                </filter>
+                <filter id="grain" x="0" y="0" width="100%" height="100%">
+                  <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" />
+                  <feColorMatrix values="0 0 0 0 .35  0 0 0 0 .05  0 0 0 0 .08  1.6 0 0 0 -.7" />
+                </filter>
+                <filter id="marbleFx" x="0" y="0" width="100%" height="100%">
+                  <feTurbulence type="turbulence" baseFrequency=".022 .05" numOctaves="3" seed="21" />
+                  <feColorMatrix values="0 0 0 0 1  0 0 0 0 .93  0 0 0 0 .9  -14 0 0 0 1.55" />
+                  <feGaussianBlur stdDeviation=".5" />
+                </filter>
+                <filter id="soft1"><feGaussianBlur stdDeviation=".7" /></filter>
+                <filter id="soft3"><feGaussianBlur stdDeviation="3" /></filter>
+                <filter id="soft6"><feGaussianBlur stdDeviation="6" /></filter>
+                <clipPath id="meatClip"><path d="M 64 112 C 74 70, 132 44, 188 50 C 240 56, 272 94, 272 140 C 272 182, 252 216, 218 238 C 186 258, 146 262, 112 252 C 76 242, 44 216, 38 178 C 34 152, 54 136, 64 112 Z" /></clipPath>
+              </defs>
+              <g id="panArt">
+                <path d="M 64 112 C 74 70, 132 44, 188 50 C 240 56, 272 94, 272 140 C 272 182, 252 216, 218 238 C 186 258, 146 262, 112 252 C 76 242, 44 216, 38 178 C 34 152, 54 136, 64 112 Z" fill="url(#crustG)" />
+                <g clip-path="url(#meatClip)">
+                  <rect class="fibers" width="300" height="300" filter="url(#fibers)" transform="rotate(-28 150 150)" />
+                  <rect class="grain" width="300" height="300" filter="url(#grain)" />
+                  <rect class="marble-fx" width="300" height="300" filter="url(#marbleFx)" transform="rotate(-25 150 150)" /><g class="marble" fill="none" stroke-linecap="round" filter="url(#soft3)"><path d="M 96 150 C 122 128, 168 122, 198 140 C 218 154, 222 180, 208 204" stroke-width="5" /><path d="M 200 78 C 206 96, 222 104, 244 108" stroke-width="4" /></g>
+                  <path d="M 64 112 C 74 70, 132 44, 188 50 C 240 56, 272 94, 272 140 C 272 182, 252 216, 218 238 C 186 258, 146 262, 112 252 C 76 242, 44 216, 38 178 C 34 152, 54 136, 64 112 Z" class="edge" fill="none" stroke="#3a0408" stroke-width="20" opacity=".55" filter="url(#soft6)" />
+                  <path class="cap" d="M 230 230 C 194 246, 150 248, 116 238 C 82 228, 58 204, 53 176 C 50 154, 57 134, 68 114 L 20 90 L 10 220 L 110 300 L 260 280 Z" fill="url(#fatG)" />
+                  <path d="M 230 230 C 194 246, 150 248, 116 238 C 82 228, 58 204, 53 176 C 50 154, 57 134, 68 114" fill="none" stroke="rgba(150,30,40,.35)" stroke-width="5" filter="url(#soft3)" />
+                  <ellipse class="gold-leaf" cx="156" cy="152" rx="120" ry="110" />
+                </g>
+                <path d="M 64 112 C 74 70, 132 44, 188 50 C 240 56, 272 94, 272 140 C 272 182, 252 216, 218 238 C 186 258, 146 262, 112 252 C 76 242, 44 216, 38 178 C 34 152, 54 136, 64 112 Z" fill="none" stroke="rgba(40,4,8,.45)" stroke-width="1.5" />
+                <g class="sheen" fill="#fff">
+                  <path d="M 92 92 C 112 72, 146 62, 176 64 C 150 70, 120 82, 100 100 Z" opacity=".35" filter="url(#soft1)" />
+                  <ellipse cx="214" cy="96" rx="9" ry="3" transform="rotate(30 214 96)" opacity=".55" filter="url(#soft1)" />
+                  <ellipse cx="132" cy="170" rx="6" ry="2" transform="rotate(-20 132 170)" opacity=".45" filter="url(#soft1)" />
+                  <ellipse cx="236" cy="168" rx="4" ry="9" transform="rotate(20 236 168)" opacity=".3" filter="url(#soft1)" />
+                </g>
+              </g>
+            </svg>
+          </button>
+          <div id="fx" class="fx"></div>
+        </div>
+      </div>
+
+      <div id="buffs" class="buffs"></div>
+
+      <div class="stage ticket">
+        <figure class="stage-photo"><img id="heroImg" src="assets/stage1.jpg?v=kh1" alt="You, at this stage" draggable="false"><span class="stage-stamp" id="stageStamp" aria-hidden="true"></span></figure>
+        <div class="stage-top"><span id="stageNum" class="mono"></span><span class="stage-mat mono" id="stageMat"></span></div>
+        <h2 id="stageName">Little Helper</h2>
+        <p id="stageText"></p>
+        <div class="bar"><i id="stageBar"></i></div>
+        <small id="stageNext" class="mono"></small>
+      </div>
+
+      <div id="splitBox" class="split-box hidden">
+        <div class="pump-top"><span>Service style</span><span id="splitCd" class="mono"></span></div>
+        <div id="splits" class="splits"></div>
+      </div>
+    </section>
+
+    <!-- Middle: the line -->
+    <section id="middle">
+      <nav class="menu" id="menu">
+        <button data-view="gym" class="active">Kitchen</button>
+        <button data-view="muscles">Chef Skills</button>
+        <button data-view="records">Signatures</button>
+        <button data-view="comp">Cook-off <em id="compBadge"></em></button>
+        <button data-view="ach">Achievements</button>
+        <button data-view="stats">Stats</button>
+        <button data-view="options">Options</button>
+      </nav>
+      <div class="views">
+        <div class="view" id="view-gym">
+          <div id="scoopBar" class="scoop-bar hidden"></div>
+          <div class="log-head"><span>Station</span><span>Owned</span><span>Per second</span><span class="lvl-col">Level</span><span>On the line</span></div>
+          <div id="gymRows"></div>
+          <div id="board" class="board hidden"></div>
+          <div id="gymEmpty" class="empty">
+            <div class="ghost-line"><i></i><i></i><i></i><i></i></div>
+            <div class="empty-ticket ticket">
+              <b>Kitchen's empty, chef.</b>
+              <span>Buy a Burnt Toaster in the store. Equipment cooks steaks every second, even while you rest.</span>
+            </div>
+          </div>
+        </div>
+        <div class="view hidden" id="view-muscles">
+          <h2>Chef Skills</h2>
+          <p class="hint">Train a skill for a bonus that lasts this run. Skill levels reset after a Cook-off.</p>
+          <div id="muscleCards" class="cards"></div>
+        </div>
+        <div class="view hidden" id="view-records">
+          <h2>Signature Dishes</h2>
+          <div id="recordsLocked" class="locked-box">
+            <b>Endless mode</b><br>Become the Kitchen Overlord to unlock Signature Dishes and Inferno ranks.
+            They never reset and have no limit.
+          </div>
+          <div id="recordsBody" class="hidden">
+            <div id="legendBox" class="legend-box"></div>
+            <p class="hint">Each new record makes the next one harder. Signature Dishes stay after a Cook-off.</p>
+            <div id="liftCards" class="cards"></div>
+          </div>
+        </div>
+        <div class="view hidden" id="view-comp">
+          <h2>Cook-off</h2>
+          <p class="hint">Enter a Cook-off to win Stars. Your run starts over, but Stars stay forever: each one adds
+            <b id="medalPct">+2%</b> to everything (a little less past 1,000 Stars), and you can spend them on Chef's Secrets.</p>
+          <div class="comp-grid">
+            <div class="stat-box"><small>Stars</small><b id="medalTotal" class="mono">0</b><span id="medalBonus"></span></div>
+            <div class="stat-box"><small>To spend</small><b id="medalAvail" class="mono">0</b><span>on Chef's Secrets</span></div>
+            <div class="stat-box"><small>You'd win now</small><b id="medalPending" class="mono">0</b><span id="medalNext"></span></div>
+          </div>
+          <button id="competeBtn" class="big-btn">Enter the Cook-off</button>
+          <p class="hint">Keeps Stars, Chef's Secrets, Signature Dishes, sourdough, equipment levels, achievements and stats. Resets steaks, equipment, upgrades and Chef Skills.</p>
+          <div id="lockerSection" class="hidden">
+            <h3>Recipe Box</h3>
+            <p class="hint">Upgrades in your Recipe Box are kept after every Cook-off.</p>
+            <div id="lockers" class="cards"></div>
+          </div>
+          <h3>Chef's Secrets</h3>
+          <p class="hint">Secrets are permanent. Each one needs the secrets listed under it first.</p>
+          <div id="perkTree"></div>
+        </div>
+        <div class="view hidden" id="view-ach">
+          <h2>Achievements <small id="achCount" class="mono"></small></h2>
+          <div class="ach-stats" id="achStats"></div>
+          <p class="hint">Achievements raise your Reputation, which powers Hospitality upgrades. Badge rims show the tier: bronze, silver, gold, ruby, diamond.</p>
+          <div id="achGroups"></div>
+        </div>
+        <div class="view hidden" id="view-stats"><h2>Stats</h2><div class="receipt ticket"><div class="receipt-head mono" id="receiptHead"></div><div id="stats" class="stats"></div></div></div>
+        <div class="view hidden" id="view-options">
+          <h2>Options</h2>
+          <div class="options">
+            <button id="optSound" class="btn"></button>
+            <button id="optRename" class="btn secondary">Rename restaurant</button>
+            <button id="optExport" class="btn secondary">Export save</button>
+            <button id="optImport" class="btn secondary">Import save</button>
+            <a class="btn secondary" href="wiki.html" target="_blank" rel="noopener">Open the guide</a>
+            <button id="optWipe" class="btn danger">Wipe save</button>
+          </div>
+          <div class="howto-box ticket">
+            <h3>How to cook</h3>
+            <ul class="howto">
+              <li>Click the big steak to earn steaks. Golden Dumplings that float by give big boosts: click them!</li>
+              <li>Equipment in the store cooks steaks every second. Each one costs 14% more than the last.</li>
+              <li>Upgrades show up on the rack above the equipment as you progress. Hover one to read its ticket.</li>
+              <li>Grab Golden Dumplings when they appear. They start Dinner Rushes and fill the Tip Jar.</li>
+              <li>Train Chef Skills, unlock achievements for Reputation, and enter Cook-offs for permanent Stars.</li>
+              <li>Become the Kitchen Overlord to finish the main journey and unlock endless Signature Dishes.</li>
+            </ul>
+          </div>
+          <p class="hint credits">Icons by Lorc, Delapouite and contributors from <a href="https://game-icons.net" target="_blank" rel="noopener">game-icons.net</a>, licensed <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>.</p>
+        </div>
+      </div>
+      <footer class="pass" id="pass" aria-label="Kitchen summary"></footer>
+    </section>
+
+    <!-- Right: supply shop -->
+    <section id="store">
+      <div class="store-head">
+        <h2>Supply Shop</h2>
+        <span class="store-sub mono" id="storeSub">open all night</span>
+      </div>
+      <div class="rack">
+        <div class="section-label"><span>Upgrades rack</span><span id="upgCount" class="mono"></span></div>
+        <div id="upgrades" class="upg-grid"></div>
+      </div>
+      <div class="store-controls">
+        <div class="seg" id="modeSeg"><button data-mode="buy" class="active">Buy</button><button data-mode="sell">Sell</button></div>
+        <div class="seg" id="amtSeg"><button data-amt="1" class="active">1</button><button data-amt="10">10</button><button data-amt="100">100</button><button data-amt="max">Max</button></div>
+      </div>
+      <div id="buildings"></div>
+    </section>
+  </div>
+
+  <div id="tooltip" class="tooltip hidden"></div>
+  <div id="toasts"></div>
+  <div id="modal" class="modal hidden"><div class="modal-card" id="modalCard"></div></div>
+
+  <script src="core.js?v=44"></script>
+  <script src="ext/supplements.js?v=44"></script>
+  <script src="ext/coach.js?v=44"></script>
+  <script src="ext/rival.js?v=44"></script>
+  <script src="ext/seasons.js?v=44"></script>
+  <script src="ext/challenges.js?v=44"></script>
+  <script src="ext/market.js?v=44"></script>
+  <script src="ext/hellfire.js?v=44"></script>
+  <script src="ext/garden.js?v=44"></script>
+  <script src="ext/cookbook.js?v=44"></script>
+  <script src="ext/saints.js?v=44"></script>
+  <script src="icons.js?v=44"></script>
+  <script src="ui.js?v=44"></script>
+</body>
+</html>

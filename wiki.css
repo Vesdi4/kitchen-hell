@@ -1,0 +1,68 @@
+/* Guide page. Same palette as style.css: cast iron, brass and oxblood. */
+:root {
+  --iron-0: #0b0908; --iron-1: #120f0d; --iron-2: #1a1512; --iron-3: #241d19; --iron-4: #30271f;
+  --line: rgba(255, 186, 130, .13);
+  --ember: #d4a24c; --ember-hi: #ecc77a; --fire: #a8231f; --fire-hi: #c8423a;
+  --text: #f6ecdd; --text-2: #cdbca7; --text-3: #a3917d;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body {
+  margin: 0; color: var(--text); font: 16px/1.6 Barlow, system-ui, sans-serif;
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(168, 35, 31, .18), transparent 60%), var(--iron-0);
+}
+a { color: var(--ember-hi); }
+b { color: var(--ember-hi); font-weight: 600; }
+.gi { width: 1.2em; height: 1.2em; fill: currentColor; vertical-align: -.25em; flex: none; }
+
+.w-top { max-width: 1180px; margin: 0 auto; padding: 28px 16px 8px; }
+.w-back { font: 600 14px 'Barlow Condensed', sans-serif; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; color: var(--text-3); }
+.w-back:hover { color: var(--ember-hi); }
+.w-top h1 { margin: 10px 0 4px; font: 400 clamp(40px, 7vw, 64px)/1 Anton, sans-serif; letter-spacing: .02em; text-transform: uppercase; }
+.w-top h1 span { color: var(--ember); }
+.w-lede { margin: 0; color: var(--text-2); max-width: 62ch; }
+
+.w-layout { max-width: 1180px; margin: 0 auto; padding: 16px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; align-items: start; }
+.w-nav { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 2px; padding: 12px; background: var(--iron-1); border: 1px solid var(--line); border-radius: 10px; }
+.w-nav a { padding: 6px 10px; border-radius: 6px; text-decoration: none; color: var(--text-2); font: 600 15px 'Barlow Condensed', sans-serif; letter-spacing: .03em; }
+.w-nav a:hover { background: var(--iron-3); color: var(--ember-hi); }
+
+section { padding: 8px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+h2 { margin: 0 0 10px; font: 400 30px/1.15 Anton, sans-serif; letter-spacing: .03em; text-transform: uppercase; color: var(--text); }
+h2::before { content: ''; display: inline-block; width: 6px; height: .8em; margin-right: 10px; background: var(--fire); border-radius: 2px; }
+h3 { margin: 0 0 4px; font: 700 21px 'Barlow Condensed', sans-serif; letter-spacing: .03em; color: var(--ember-hi); }
+.w-branch { margin-top: 18px; }
+p, ul { color: var(--text-2); max-width: 75ch; }
+li { margin: 4px 0; }
+
+.w-tip { margin: 14px 0 0; padding: 12px 14px; background: linear-gradient(90deg, rgba(212, 162, 76, .12), rgba(212, 162, 76, .03)); border-left: 3px solid var(--ember); border-radius: 0 8px 8px 0; color: var(--text-2); }
+
+.w-table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--iron-1); }
+.w-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.w-table th { text-align: left; padding: 9px 12px; background: var(--iron-3); color: var(--text-3); font: 700 13px 'Barlow Condensed', sans-serif; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.w-table td { padding: 8px 12px; border-top: 1px solid var(--line); color: var(--text-2); vertical-align: middle; }
+.w-table tr:nth-child(even) td { background: rgba(255, 255, 255, .015); }
+.w-table td:first-child { color: var(--text); }
+.w-table small { color: var(--text-3); font-size: 13px; }
+.w-name { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; font-weight: 600; }
+.w-name .gi { color: var(--ember); }
+.w-thumb { display: block; width: 44px; height: 44px; object-fit: cover; border-radius: 6px; border: 2px solid var(--iron-4); }
+
+.w-sys { margin: 14px 0; padding: 16px 18px; background: var(--iron-1); border: 1px solid var(--line); border-radius: 10px; }
+.w-sys p { margin: 6px 0; }
+.w-req { font: 600 14px 'Barlow Condensed', sans-serif; letter-spacing: .05em; text-transform: uppercase; color: var(--fire-hi) !important; }
+.w-tipline { color: var(--text-3) !important; font-style: italic; }
+
+.w-faq dt { margin-top: 14px; font-weight: 700; color: var(--text); }
+.w-faq dd { margin: 4px 0 0; color: var(--text-2); max-width: 75ch; }
+.w-foot { padding: 12px 0 40px; color: var(--text-3); font-size: 14px; }
+
+@media (max-width: 820px) {
+  .w-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .w-nav { position: static; flex-direction: row; flex-wrap: wrap; }
+  .w-nav a { padding: 4px 8px; font-size: 14px; }
+  h2 { font-size: 25px; }
+  .w-table { font-size: 14px; }
+  .w-table th, .w-table td { padding: 7px 8px; }
+  .w-name { white-space: normal; gap: 6px; }
+}

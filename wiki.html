@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0908">
+  <title>Kitchen Hell Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍳</text></svg>">
+  <link rel="stylesheet" href="wiki.css?v=2">
+</head>
+<body>
+  <header class="w-top">
+    <a class="w-back" href="./">&larr; Back to the kitchen</a>
+    <h1>Kitchen Hell <span>Guide</span></h1>
+    <p class="w-lede">Everything the game doesn't tell you. Tables on this page are read straight from the game's data, so the numbers are always current.</p>
+  </header>
+
+  <div class="w-layout">
+    <nav class="w-nav" id="toc"></nav>
+
+    <main class="w-main">
+      <section id="basics">
+        <h2>The basics</h2>
+        <p>Click the big steak to earn <b>steaks</b>, the game's currency. Spend them on <b>kitchen equipment</b> (the shop on the right). Equipment cooks steaks for you every second, even while the game is closed (at half speed for up to 2 hours, unless you buy Chef's Secrets that extend it).</p>
+        <ul>
+          <li><b>Steaks per second</b> is the number under your total. Clicks add on top.</li>
+          <li>Every piece of equipment costs <b>14% more</b> than the last one of the same kind.</li>
+          <li><b>Upgrades</b> show up above the shop when you can almost afford them. Most double one building or your clicks. They're usually the best purchase on screen.</li>
+          <li>Your career moves through <b>11 stages</b> based on lifetime steaks. Each stage changes the steak, the photo and unlocks something new.</li>
+          <li>Tabs stay hidden until they're useful. A pulsing dot on a tab means it just opened.</li>
+        </ul>
+        <div class="w-tip"><b>Early tip:</b> Click a lot for the first few minutes, buy every cheap upgrade, then keep the cheapest building with the best value. Equipment soon makes far more than clicking.</div>
+      </section>
+
+      <section id="stages">
+        <h2>Career stages</h2>
+        <p>You move up a stage when your <b>lifetime</b> steaks reach the target. Stages are never lost, not even after a Cook-off.</p>
+        <div class="w-table-wrap"><table class="w-table" id="tblStages"></table></div>
+      </section>
+
+      <section id="unlocks">
+        <h2>When does what unlock?</h2>
+        <p>Rough times for a first playthrough with steady clicking. Your times will differ.</p>
+        <div class="w-table-wrap"><table class="w-table">
+          <thead><tr><th>Feature</th><th>Unlocks at</th><th>Roughly</th></tr></thead>
+          <tbody>
+            <tr><td>Chef Skills</td><td>Dishwasher stage</td><td>~2 min</td></tr>
+            <tr><td>Service styles</td><td>Delivery Runner stage</td><td>~6 min</td></tr>
+            <tr><td>Kitchen Demon</td><td>Prep Cook stage</td><td>~12 min</td></tr>
+            <tr><td>Seasons</td><td>Knife Guy stage</td><td>~35 min</td></tr>
+            <tr><td>Pests &amp; Critics</td><td>200M lifetime steaks or Recipe Blogger</td><td>~50 min</td></tr>
+            <tr><td>Cook-off (Stars)</td><td>Recipe Blogger stage</td><td>~1 h</td></tr>
+            <tr><td>Sourdough</td><td>1B lifetime steaks</td><td>~1 h</td></tr>
+            <tr><td>Hellfire</td><td>10 Line Cooks and Recipe Blogger</td><td>~1.5 h</td></tr>
+            <tr><td>Herb Garden</td><td>A Grill Station and Head of Accounting</td><td>~2 h</td></tr>
+            <tr><td>Exchange</td><td>Own a Walk-in Freezer</td><td>later</td></tr>
+            <tr><td>Hot Sauce</td><td>Own a Hot Sauce Lab</td><td>later</td></tr>
+            <tr><td>Shrine</td><td>Own a Diner</td><td>later</td></tr>
+            <tr><td>Cookbook</td><td>Own a Molecular Kitchen</td><td>later</td></tr>
+            <tr><td>Hell Shifts</td><td>Head Chef stage, or after your first Cook-off</td><td>later</td></tr>
+            <tr><td>Signatures &amp; Inferno ranks</td><td>Reach Kitchen Overlord (the last stage)</td><td>endgame</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section id="equipment">
+        <h2>Kitchen equipment</h2>
+        <p>Base price and base steaks per second for each building. Upgrades multiply the base output.</p>
+        <div class="w-table-wrap"><table class="w-table" id="tblBuildings"></table></div>
+      </section>
+
+      <section id="dumplings">
+        <h2>Golden dumplings</h2>
+        <p>Every 2 to 6 minutes a <b>golden dumpling</b> floats onto the screen for about 12 seconds. Click it before it disappears. It's the single biggest boost in the game.</p>
+        <div class="w-table-wrap"><table class="w-table">
+          <thead><tr><th>Result</th><th>Chance</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td>Tip Jar</td><td>~37%</td><td>Instant steaks: 12% of your bank, capped at 12 minutes of production.</td></tr>
+            <tr><td>Dinner Rush</td><td>~37%</td><td>Steaks per second ×6 for 70 seconds.</td></tr>
+            <tr><td>Overbooked</td><td>~9%</td><td>One building you own 10+ of boosts production (+8% per building owned, up to 120) for 35 s.</td></tr>
+            <tr><td>Adrenaline</td><td>~6%</td><td>Clicks ×80 for 12 seconds. Click as fast as you can.</td></tr>
+            <tr><td>Second Helping</td><td>8%</td><td>A chain: dumplings come back quickly, each paying more, up to 7 in a row.</td></tr>
+            <tr><td>Sourdough loaf</td><td>~3%</td><td>A free Sourdough loaf (after Sourdough unlocks).</td></tr>
+            <tr><td>Dumpling Rain</td><td>1.2%</td><td>A swarm of dumplings for 12 seconds. Grab them all.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="w-tip"><b>Combo:</b> Dinner Rush and Adrenaline stack. Getting both at once is how big numbers happen. Instinct (Chef Skill), Lucky Chopsticks and the Street Food style all make dumplings appear more often.</div>
+      </section>
+
+      <section id="skills">
+        <h2>Chef Skills</h2>
+        <p>Bought with steaks, up to level <b id="skillMax"></b>. They reset after a Cook-off (Family Notebook keeps a quarter).</p>
+        <div class="w-table-wrap"><table class="w-table" id="tblSkills"></table></div>
+      </section>
+
+      <section id="styles">
+        <h2>Service styles</h2>
+        <p>Pick one focus for the run in the Chef Skills tab. You can switch every 5 minutes.</p>
+        <div class="w-table-wrap"><table class="w-table" id="tblStyles"></table></div>
+        <div class="w-tip"><b>Which one?</b> Fast Food if you click a lot, Slow Cooking if you leave the game open idle, Street Food if you hunt dumplings.</div>
+      </section>
+
+      <section id="reputation">
+        <h2>Reputation &amp; Hospitality</h2>
+        <p>Every achievement gives <b>+2% Reputation</b> (the Rep chip at the top). Reputation does nothing alone. <b>Hospitality upgrades</b> (Clean Towels, Soft Music, Candlelit Tables…) turn it into steaks per second, each one adding a share of your Reputation. More achievements make every Hospitality upgrade stronger, so collecting them pays off.</p>
+        <p>Shadow achievements (secret, weird challenges) don't count toward Reputation. They're there for bragging rights.</p>
+      </section>
+
+      <section id="cookoff">
+        <h2>Cook-off &amp; Stars</h2>
+        <p>The Cook-off is the prestige reset. You give up your steaks, equipment, upgrades and Chef Skills for the run, and earn <b>Stars</b>.</p>
+        <ul>
+          <li>Stars = cube root of (lifetime steaks ÷ 1,000,000). So 1 trillion lifetime steaks is 100 Stars total. You only get the new ones.</li>
+          <li>Every Star gives <b>+3% to everything</b>, forever. Past 1,000 Stars each extra Star counts for less.</li>
+          <li>Stars are also spent on <b>Chef's Secrets</b> (below). Spending them does <b>not</b> remove their +3% bonus.</li>
+          <li>Kept forever: stages, achievements, Stars, Chef's Secrets, Sourdough levels, seasonal dishes, Signatures.</li>
+        </ul>
+        <div class="w-tip"><b>When to Cook-off?</b> The first time, at around 10 Stars. After that, when the pending Stars would roughly double what you have. A fresh run with more Stars catches up fast.</div>
+      </section>
+
+      <section id="secrets">
+        <h2>Chef's Secrets</h2>
+        <p>The permanent upgrade tree, bought with Stars in the Cook-off tab. Start with <b>Kitchen Pass</b>, it opens everything else.</p>
+        <div id="tblPerks"></div>
+        <div class="w-tip"><b>Good first picks:</b> Kitchen Pass, Sous-Chef (auto-clicks), Packed Lunch, Lucky Chopsticks, Coupon Book, then Recipe Box I to keep your best upgrade between runs.</div>
+      </section>
+
+      <section id="sourdough">
+        <h2>Sourdough</h2>
+        <p>After 1 billion lifetime steaks you get one <b>Sourdough loaf</b> every 2 real hours (offline too, up to 12 waiting) and sometimes from golden dumplings. Spend loaves in the shop to <b>level up a building</b>: +1% output per level, forever. A level costs its number in loaves (level 5 costs 5). Spread levels on your strongest building.</p>
+      </section>
+
+      <section id="systems">
+        <h2>Side systems</h2>
+        <p>Each one has its own tab once unlocked. None of them is required, but each one adds a lot once you learn it.</p>
+
+        <article class="w-sys" id="sys-demon">
+          <h3>Kitchen Demon</h3>
+          <p class="w-req">Unlocks at the Prep Cook stage.</p>
+          <p>A little demon in your oven. Feed it steaks or hit equipment milestones to level it up. Higher levels unlock <b>Pacts</b>: auras you equip for a permanent bonus. The demon also makes short timed <b>Demands</b> ("buy 10 of X in 60 seconds"). Complete them for a reward.</p>
+          <p class="w-tipline">Keep it fed. Equip the Pact that matches how you play (clicking or idle).</p>
+        </article>
+
+        <article class="w-sys" id="sys-seasons">
+          <h3>Seasons</h3>
+          <p class="w-req">Unlocks at the Knife Guy stage.</p>
+          <p>Real-calendar events: New Year Banquet (January), Spring Market (March to April), Summer BBQ (June to August), Hell Night (October), Feast of Lights (December). Each gives a passive bonus while it lasts, and <b>seasonal dishes</b> drop from golden dumplings and cooking. Dishes are kept forever (+1% steaks per second or +2% cooking each). The last dish of every season only drops from cooking.</p>
+          <p class="w-tipline">The Menu Swap Pass upgrade lets a run pick any season, so you can collect them all year.</p>
+        </article>
+
+        <article class="w-sys" id="sys-pests">
+          <h3>Pests &amp; Critics</h3>
+          <p class="w-req">Unlocks at 200M lifetime steaks or the Recipe Blogger stage.</p>
+          <p><b>Cockroaches</b> scurry over your steak. Each one steals 5% of production while it's there. Click one several times to squash it: it pays back everything it stole <b>with interest</b> (+15%, or +30% for golden ones). Sometimes a <b>food critic</b> challenges you to a timed duel.</p>
+          <p class="w-tipline">Letting roaches build up for a while and then squashing them all gives a bigger payout than squashing each one right away.</p>
+        </article>
+
+        <article class="w-sys" id="sys-hellfire">
+          <h3>Hellfire Contract</h3>
+          <p class="w-req">Unlocks with 10 Line Cooks at the Recipe Blogger stage.</p>
+          <p>A ladder of infernal clauses you sign with steaks. Each clause makes Line Cooks and the whole kitchen stronger, but raises <b>Damnation</b> (0 to 3). Higher Damnation means golden dumplings sometimes come out <b>Charred</b>, with a risky outcome. <b>Exorcism</b> pauses Damnation for 30 real minutes. The <b>Truce</b> ends it for the run, at a price.</p>
+          <p class="w-tipline">Sign the first clauses early. They're cheap and Damnation stays low.</p>
+        </article>
+
+        <article class="w-sys" id="sys-garden">
+          <h3>Herb Garden</h3>
+          <p class="w-req">Unlocks with a Grill Station at the Head of Accounting stage.</p>
+          <p>Plant herbs that grow in real time (one tick per minute, also while closed). Ripe plants give small passive bonuses. Harvesting pays steaks or a buff. An empty plot next to two ripe parents can sprout a <b>crossbreed</b>, which is how you discover rarer plants.</p>
+          <p class="w-tipline">Leave gaps between ripe plants to get crossbreeds. Harvest just before a plant dies.</p>
+        </article>
+
+        <article class="w-sys" id="sys-exchange">
+          <h3>Ingredient Exchange</h3>
+          <p class="w-req">Unlocks when you own a Walk-in Freezer.</p>
+          <p>A trading minigame. Ingredients from Rice Sacks to Black Truffles have prices that drift up and down. Buy low, sell high. Prices are measured in seconds of your production, so the game stays useful at any size.</p>
+          <p class="w-tipline">Every ingredient swings around its normal price. Buy when it's far below and wait.</p>
+        </article>
+
+        <article class="w-sys" id="sys-sauce">
+          <h3>Hot Sauce Rack</h3>
+          <p class="w-req">Unlocks when you own a Hot Sauce Lab.</p>
+          <p>Splash sauces into a few rack slots. Each lasts 10 real minutes and gives a bonus (clicks, production, dumpling rate, cheaper equipment…). Some pairs make a <b>combo</b>. Every splash builds <b>spice tolerance</b>, which weakens all effects, and too much triggers a <b>Meltdown</b>.</p>
+          <p class="w-tipline">Don't splash nonstop. Let tolerance cool down and use sauces before a big dumpling combo.</p>
+        </article>
+
+        <article class="w-sys" id="sys-shrine">
+          <h3>Shrine (Saints of the Line)</h3>
+          <p class="w-req">Unlocks when you own a Diner.</p>
+          <p>Three niches, Gold, Copper and Tin, hold saints at 100%, 50% and 25% strength. Each saint has a <b>blessing and a curse</b>, and both scale with the niche. Moving saints costs Devotion (max 3, +1 per real hour). Saints stay through Cook-offs, and each Cook-off gives one free placement.</p>
+          <p class="w-tipline">Put the saint whose curse you don't care about in Gold.</p>
+        </article>
+
+        <article class="w-sys" id="sys-cookbook">
+          <h3>Cursed Cookbook</h3>
+          <p class="w-req">Unlocks when you own a Molecular Kitchen.</p>
+          <p>Cast recipe-spells with <b>Ink</b>, which refills over real time (slower when the book is nearly dry). Spells range from instant steaks to summoning a golden dumpling or making your equipment haunted. Every spell can <b>misfire</b>, and it's more likely when the book is dry or you cast too often.</p>
+          <p class="w-tipline">Keep the book mostly full. Golden Dumpling Invocation during a Dinner Rush is the classic combo.</p>
+        </article>
+
+        <article class="w-sys" id="sys-shifts">
+          <h3>Hell Shifts</h3>
+          <p class="w-req">Unlocks at the Head Chef stage, or after your first Cook-off.</p>
+          <p>Handicapped runs (Power Outage, Health Inspection, Burnt Hand, Broken Supplier, Dumpling Drought, Gas Leak). Start one with a Cook-off and reach the target to earn a <b>permanent +4% bonus</b>. The <b>Simmer</b> switch is also here.</p>
+          <p class="w-tipline">Do them once you have a solid set of Chef's Secrets. They're much easier with Stars behind you.</p>
+        </article>
+      </section>
+
+      <section id="endgame">
+        <h2>Endgame: Signatures &amp; Inferno ranks</h2>
+        <p>Reach the last stage, <b>Kitchen Overlord</b>, to open the endless phase.</p>
+        <ul>
+          <li><b>Inferno ranks:</b> each rank needs 1,000× more lifetime steaks than the last and gives <b>+10% steaks per second</b> forever.</li>
+          <li><b>Signature dishes</b> are endless, very expensive upgrades that are never reset:</li>
+        </ul>
+        <div class="w-table-wrap"><table class="w-table" id="tblSigs"></table></div>
+      </section>
+
+      <section id="faq">
+        <h2>FAQ</h2>
+        <dl class="w-faq">
+          <dt>Where is my save?</dt>
+          <dd>In your browser, on this site. It saves automatically. Use <b>Options → Export</b> to back it up or move it to another device. Clearing browser data deletes it.</dd>
+          <dt>Does the game run while closed?</dt>
+          <dd>Yes. Equipment keeps cooking at 50% for up to 2 hours. Overnight Proofing and Closed for Holidays (Chef's Secrets) extend that.</dd>
+          <dt>I'm stuck. Nothing is affordable.</dt>
+          <dd>That's usually the moment for a Cook-off. If you can't yet, buy the cheapest upgrade and wait for a golden dumpling.</dd>
+          <dt>Can I buy more than one at a time?</dt>
+          <dd>Yes. Switch the shop to ×10 or ×100. The building name then shows how many you're buying, and you can sell the same way.</dd>
+        </dl>
+      </section>
+
+      <footer class="w-foot">Icons by <a href="https://game-icons.net" target="_blank" rel="noopener">game-icons.net</a> (Lorc, Delapouite and contributors), CC BY 3.0.</footer>
+    </main>
+  </div>
+
+  <script src="core.js?v=44"></script>
+  <script src="icons.js?v=44"></script>
+  <script src="wiki.js?v=1"></script>
+</body>
+</html>
