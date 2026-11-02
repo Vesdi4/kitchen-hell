@@ -489,8 +489,10 @@ function setLocker(slot, id) {
   return true;
 }
 function compete() {
+  if (pendingMedals() < 1) return 0;
+  // Last payouts of the old run (e.g. squashed cockroaches) land before the reset, so they count toward Stars.
+  extEach('beforeCompete');
   const p = pendingMedals();
-  if (p < 1) return 0;
   if (S.upg.length === 0) S.flags.rawTalent = true;
   S.medals += p;
   S.prestiges++;
@@ -715,7 +717,8 @@ const ACH_CATEGORIES = [...new Set(ACH.map(a => a.cat))];
 // Feature modules (ext/*.js) plug in here without editing the core. A module is an object:
 // { id, state() -> default saved state, gps(), click(), cost(), shakerRate(), buffDur() -> multipliers,
 //   allowBuilding(b), allowUpgrade(u) -> false to block, tick(dt), slow() once per second,
-//   compete(starsWon), shaker() -> optional {title, text} to replace a golden dumpling's normal effect,
+//   beforeCompete() just before a cook-off resets the run, compete(starsWon) right after it,
+//   shaker() -> optional {title, text} to replace a golden dumpling's normal effect,
 //   tab: { label, render(el), update(el) } for its own menu tab }.
 const EXT = [];
 function registerExt(e) { EXT.push(e); return e; }

@@ -209,11 +209,14 @@ registerExt({
     }
     rvLast = now; st.seen = now;
   },
-  compete: () => {
+  // Paid into the old run, so the stolen steaks count toward Stars and are reset with everything else.
+  beforeCompete: () => {
     const st = rvSt(), v = rvStash();
     if (v > 0) earn(v);
-    if (st.free.length && typeof toast === 'function') toast(`🪳 ${fmt(st.free.length)} ${st.free.length === 1 ? 'cockroach' : 'cockroaches'} fled the old kitchen and dropped ${fmt(v)} steaks on the way out.`);
+    if (st.free.length && typeof toast === 'function') toast(`🪳 ${fmt(st.free.length)} ${st.free.length === 1 ? 'cockroach' : 'cockroaches'} fled the old kitchen and gave back ${fmt(v)} steaks, counted toward your Stars.`);
     st.refund += v; st.free = [];
+  },
+  compete: () => {
     rvOffer = null; rvDuel = null; rvNextDuel = clock() + rand(20, 40) * 60000;
     rvDirty = true;
   },
